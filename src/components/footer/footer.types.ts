@@ -1,8 +1,8 @@
-import { Status } from '../../types/Status';
+import { Statuses } from '../../types/Statuses';
 import { Todo } from '../../types/Todo';
 
 export type FooterTypes = {
   todos: Todo[];
-  handleSelectTodo: (action: Status) => void;
-  selectedStatus: Status;
+  handleSelectTodo: (action: Statuses) => void;
+  selectedStatus: Statuses;
 };

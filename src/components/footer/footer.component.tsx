@@ -2,6 +2,7 @@ import React from 'react';
 import { FooterTypes } from './footer.types';
 import { text } from '../../constants/text';
 import classNames from 'classnames';
+import { Statuses } from '../../types/Statuses';
 
 export const FooterComponent: React.FC<FooterTypes> = ({
   todos,
@@ -16,41 +17,20 @@ export const FooterComponent: React.FC<FooterTypes> = ({
         <span className="todo-count" data-cy="TodosCounter">
           {todoCounter} items left
         </span>
-
-        {/* Active link should have the 'selected' class */}
         <nav className="filter" data-cy="Filter">
-          <a
-            onClick={() => handleSelectTodo('all')}
-            href="#/"
-            className={classNames('filter__link', {
-              selected: selectedStatus === 'all',
-            })}
-            data-cy="FilterLinkAll"
-          >
-            {text.all}
-          </a>
-
-          <a
-            onClick={() => handleSelectTodo('active')}
-            href="#/active"
-            className={classNames('filter__link', {
-              selected: selectedStatus === 'active',
-            })}
-            data-cy="FilterLinkActive"
-          >
-            {text.active}
-          </a>
-
-          <a
-            onClick={() => handleSelectTodo('completed')}
-            href="#/completed"
-            className={classNames('filter__link', {
-              selected: selectedStatus === 'completed',
-            })}
-            data-cy="FilterLinkCompleted"
-          >
-            {text.completed}
-          </a>
+          {Object.values(Statuses).map(status => (
+            <a
+              key={status}
+              onClick={() => handleSelectTodo(status)}
+              href={`#/${status}`}
+              className={classNames('filter__link', {
+                selected: selectedStatus === status,
+              })}
+              data-cy={`FilterLink${text[status]}`}
+            >
+              {text[status]}
+            </a>
+          ))}
         </nav>
 
         {/* this button should be disabled if there are no completed todos */}

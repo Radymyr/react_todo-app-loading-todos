@@ -9,12 +9,12 @@ import { NotifyComponent } from './components/notification/notify.component';
 import { text } from './constants/text';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { Status } from './types/Status';
+import { Statuses } from './types/Statuses';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [customError, setCustomError] = useState<string>('');
-  const [selectedStatus, setSelectedStatus] = useState<Status>('all');
+  const [selectedStatus, setSelectedStatus] = useState<Statuses>(Statuses.All);
 
   useEffect(() => {
     setCustomError('');
@@ -30,11 +30,11 @@ export const App: React.FC = () => {
 
   const sortedTodoByStatus = useMemo(() => {
     return todos.filter(todo => {
-      if (selectedStatus === 'completed') {
+      if (selectedStatus === Statuses.Completed) {
         return todo.completed;
       }
 
-      if (selectedStatus === 'active') {
+      if (selectedStatus === Statuses.Active) {
         return !todo.completed;
       }
 
@@ -42,7 +42,7 @@ export const App: React.FC = () => {
     });
   }, [selectedStatus, todos]);
 
-  const handleSelectTodo = (action: Status) => {
+  const handleSelectTodo = (action: Statuses) => {
     setSelectedStatus(action);
   };
 

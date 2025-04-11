@@ -4,23 +4,21 @@ import { TodoItemTypes } from './todo-item';
 
 export const TodoItemComponent: React.FC<TodoItemTypes> = ({ todo }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { completed } = todo;
 
   const handleLoading = () => {
     setIsLoading(false);
   };
 
   return (
-    <div
-      data-cy="Todo"
-      className={classNames('todo', { completed: todo.completed })}
-    >
+    <div data-cy="Todo" className={classNames('todo', { completed })}>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className="todo__status-label">
         <input
           data-cy="TodoStatus"
           type="checkbox"
           className="todo__status"
-          checked={todo.completed}
+          checked={completed}
         />
       </label>
 
