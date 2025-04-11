@@ -4,7 +4,7 @@ import { TodoItemTypes } from './todo-item';
 
 export const TodoItemComponent: React.FC<TodoItemTypes> = ({ todo }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { completed } = todo;
+  const { completed, title } = todo;
 
   const handleLoading = () => {
     setIsLoading(false);
@@ -23,7 +23,7 @@ export const TodoItemComponent: React.FC<TodoItemTypes> = ({ todo }) => {
       </label>
 
       <span data-cy="TodoTitle" className="todo__title">
-        {todo.title}
+        {title}
       </span>
 
       {/* Remove button appears only on hover */}
